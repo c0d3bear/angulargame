@@ -1,0 +1,181 @@
+{\rtf1\ansi\ansicpg1252\cocoartf1038\cocoasubrtf360
+{\fonttbl\f0\fnil\fcharset0 Menlo-Regular;}
+{\colortbl;\red255\green255\blue255;\red26\green26\blue26;\red255\green255\blue255;}
+\margl1440\margr1440\vieww9000\viewh8400\viewkind0
+\deftab720
+\pard\pardeftab720\ql\qnatural
+
+\f0\fs22 \cf2 \cb3 \
+var opcvNavOn=true;\
+var opcvIsTestPg=false;\
+\
+\
+var opcvTm=0;\
+var opcvRefreshCount=0;\
+var opcvNextBtnFree=new Date().getTime()+0;\
+\
+$(document).ready(function()\{\
+	$.ajaxSetup(\{ cache: false, type:"POST", dataType:"html" \});\
+	\
+	opcvKeepAlive();\
+\});\
+\
+function opcvKeepAlive() \{\
+	if (++opcvRefreshCount > 60) \{\
+		alert("Your OPLS server session is about to expire. If you want to continue you'll need to refresh your Content Viewer (opcv) page. Click OK to close this message and press F5 from the main opcv page to refresh your session.");\
+		opcvRefreshCount = 0;\
+	\}\
+	$.ajax(\{ url:"/opcv/KeepAlive?ot=nugget&oid=908", content:document.body \});\
+	setTimeout('opcvKeepAlive()', 60000);\
+	return false;\
+\}\
+function opcvSwitchOnNav() \{\
+	opcvNavOn = true;\
+\}\
+function opcvSwitchOffNav() \{\
+	opcvNavOn = false;\
+\}\
+function opcvGoPrev() \{\
+	var url = "";\
+	if (url.length > 0) \{\
+		if (opcvNavOn) \{\
+			document.location.href=url;\
+		\} else \{\
+			if (opcvIsTestPg) \{\
+				if (confirm("To complete the assessment you must click the Finish button below the last question\\nQuit Assessment?")) \{\
+					document.location.href=url;\
+				\}\
+			\}\
+		\}\
+	\}\
+	return false;\
+\}\
+function opcvDoRefresh() \{\
+	var url = "/opcv/pages/nugget/run_nugget.jsp?act=refresh";\
+	if (url.length > 0) \{\
+		document.location.href=url;\
+	\}\
+	return false;\
+\}\
+function opcvGoNext() \{\
+	var url = "/opcv/pages/nugget/run_nugget.jsp?act=page&pn=1";\
+	if (url.length > 0) \{\
+		var dt = new Date();\
+		if (dt.getTime() >= opcvNextBtnFree) \{\
+			if (opcvNavOn) \{\
+				document.location.href=url;\
+			\} else \{\
+				if (opcvIsTestPg) \{\
+					if (confirm("To complete the assessment you must click the Finish button below the last question\\nQuit Assessment?")) \{\
+						document.location.href=url;\
+					\}\
+				\}\
+			\}\
+		\} else \{\
+			alert("Minimum time not yet reached");\
+		\}\
+	\}\
+	return false;\
+\}\
+\
+\
+\
+\
+\
+\
+\
+\
+new section for continue button \
+\
+\
+<button id="nxtbtn" onclick="return opcvDoContinue();">Continue</button>\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+var opcvNavOn=true;\
+var opcvIsTestPg=false;\
+ opcvNavOn = false; opcvIsTestPg=true; \
+ opcvNavOn = false; opcvIsTestPg=true; \
+var opcvTm=0;\
+var opcvRefreshCount=0;\
+var opcvNextBtnFree=new Date().getTime()+0;\
+\
+$(document).ready(function()\{\
+	$.ajaxSetup(\{ cache: false, type:"POST", dataType:"html" \});\
+	\
+	opcvKeepAlive();\
+\});\
+\
+function opcvKeepAlive() \{\
+	if (++opcvRefreshCount > 60) \{\
+		alert("Your OPLS server session is about to expire. If you want to continue you'll need to refresh your Content Viewer (opcv) page. Click OK to close this message and press F5 from the main opcv page to refresh your session.");\
+		opcvRefreshCount = 0;\
+	\}\
+	$.ajax(\{ url:"/opcv/KeepAlive?ot=nugget&oid=907", content:document.body \});\
+	setTimeout('opcvKeepAlive()', 60000);\
+	return false;\
+\}\
+function opcvSwitchOnNav() \{\
+	opcvNavOn = true;\
+\}\
+function opcvSwitchOffNav() \{\
+	opcvNavOn = false;\
+\}\
+function opcvGoPrev() \{\
+	var url = "/opcv/pages/nugget/run_nugget.jsp?act=page&pn=0";\
+	if (url.length > 0) \{\
+		if (opcvNavOn) \{\
+			document.location.href=url;\
+		\} else \{\
+			if (opcvIsTestPg) \{\
+				if (confirm("To complete the assessment you must click the Finish button below the last question\\nQuit Assessment?")) \{\
+					document.location.href=url;\
+				\}\
+			\}\
+		\}\
+	\}\
+	return false;\
+\}\
+function opcvDoRefresh() \{\
+	var url = "";\
+	if (url.length > 0) \{\
+		document.location.href=url;\
+	\}\
+	return false;\
+\}\
+function opcvGoNext() \{\
+	var url = "/opcv/pages/nugget/end_nugget.jsp";\
+	if (url.length > 0) \{\
+		var dt = new Date();\
+		if (dt.getTime() >= opcvNextBtnFree) \{\
+			if (opcvNavOn) \{\
+				document.location.href=url;\
+			\} else \{\
+				if (opcvIsTestPg) \{\
+					if (confirm("To complete the assessment you must click the Finish button below the last question\\nQuit Assessment?")) \{\
+						document.location.href=url;\
+					\}\
+				\}\
+			\}\
+		\} else \{\
+			alert("Minimum time not yet reached");\
+		\}\
+	\}\
+	return false;\
+\}\
+\
+\
+\
+\
+\
+}
